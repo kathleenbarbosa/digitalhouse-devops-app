@@ -95,11 +95,11 @@ pipeline {
                             docker.image('digitalhouse-devops').pull()
                         }
 
-                        echo 'Deploy para Desenvolvimento/Homologação'
+                        echo 'Deploy para Desenvolvimento'
                         sh "hostname"
-                        catchError {
+                        catchError{
                             sh "docker stop app1"
-                            sh "docker rm app1"
+                            sh "docker rm app1"    
                         }
                         //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
@@ -109,8 +109,10 @@ pipeline {
                         
                         sh "docker ps"
                         sh 'sleep 10'
-                        sh 'curl http://ec2-3-228-9-63.compute-1.amazonaws.com:8030/api/v1/healthcheck'
+                        sh 'curl http://ec2-3-81-72-146.compute-1.amazonaws.com:8030/api/v1/healthcheck'
 
+                    } else {
+                        echo "Current Job is "Produção", skipping step."
                     }
                 }
             }
@@ -126,7 +128,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/master'){
+                    if(env.GIT_BRANCH=='master'){
  
                         environment {
 
@@ -138,7 +140,6 @@ pipeline {
                             REGION="us-east-1" 
                             PERMISSION=""
                             ACCEPTED_FILE_FORMATS_ARRAY=""
-                            NODE_NAME="dh-lemniscata-devops-prod"
                         }
 
 
@@ -148,19 +149,19 @@ pipeline {
 
                         echo 'Deploy para Producao'
                         sh "hostname"
-                        catchError {
-                            sh "docker stop app1"
-                            sh "docker rm app1"
-                        }
+                        sh "docker stop app1"
+                        sh "docker rm app1"
                         //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: 'dh-lemniscata-devops-prod']]) {
-                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-prod 682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                          sh "docker run -d --name app1 -p 3.208.92.64:8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-prod https://682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
-                        sh 'curl http://ec2-3-208-92-64.compute-1.amazonaws.com:8030/api/v1/healthcheck'
+                        sh 'curl http://ec2-54-174-111-243.compute-1.amazonaws.com:8030/api/v1/healthcheck'
 
+                    } else {
+                        echo "Current Job is "Homolocação", skipping step."
                     }
                 }
             }
