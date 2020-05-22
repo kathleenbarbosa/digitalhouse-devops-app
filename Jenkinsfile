@@ -80,7 +80,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Homolog: Actual job is Homologação, skipping step') {
+        stage('Deploy to Homolog: Actual job is Produção, skipping step') {
             agent {  
                 node {
                     label 'homolog'
