@@ -4,7 +4,7 @@ pipeline {
 
     environment {
 
-        NODE_ENV="development"
+        NODE_ENV="produção"
         AWS_ACCESS_KEY=""
         AWS_SECRET_ACCESS_KEY=""
         AWS_SDK_LOAD_CONFIG="0"
@@ -80,7 +80,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Homolog') {
+        stage('Deploy to Homolog: Actual job is Homologação, skipping step') {
             agent {  
                 node {
                     label 'homolog'
@@ -119,7 +119,7 @@ pipeline {
 
         }
 
-        stage('Deploy to Producao: Actual job is Homologação, skipping step') {
+        stage('Deploy to Producao') {
             agent {  
                 node {
                     label 'prod'
