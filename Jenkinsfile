@@ -154,8 +154,7 @@ pipeline {
                         //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: 'dh-lemniscata-devops-prod']]) {
-                          sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-prod https://682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
-                          
+                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-prod 682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
