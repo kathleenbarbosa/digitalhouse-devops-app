@@ -126,7 +126,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='intermed'){
+                    if(env.GIT_BRANCH=='origin/intermed'){
  
                         environment {
 
