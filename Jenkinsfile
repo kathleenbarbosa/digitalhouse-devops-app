@@ -71,7 +71,7 @@ pipeline {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
-                            docker.withRegistry('672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops", 'ecr:us-east-1:ecr-key') {
+                            docker.withRegistry('672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops', 'ecr:us-east-1:ecr-key') {
                                 docker.image('digitalhouse-devops').push()
                             }
                         }
