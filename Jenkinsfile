@@ -71,7 +71,7 @@ pipeline {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
-                            docker.withRegistry('https://682647774837.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-key') {
+                            docker.withRegistry('672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops, 'ecr:us-east-1:ecr-key') {
                                 docker.image('digitalhouse-devops').push()
                             }
                         }
@@ -89,7 +89,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/homolog'){
+                    if(env.GIT_BRANCH=='master'){
  
                         docker.withRegistry('https://682647774837.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-key') {
                             docker.image('digitalhouse-devops').pull()
@@ -104,12 +104,12 @@ pipeline {
                         //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: 'dh-lemniscata-devops-homolog']]) {
-                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-homolog 682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-pi-kath-devops-dev 672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         }
                         
                         sh "docker ps"
                         sh 'sleep 10'
-                        sh 'curl ec2-3-81-72-146.compute-1.amazonaws.com:8030/api/v1/healthcheck'
+                        sh 'curl ec2-52-90-6-97.compute-1.amazonaws.com:8030/api/v1/healthcheck'
 
                     }
                 }
@@ -126,7 +126,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/intermed'){
+                    if(env.GIT_BRANCH=='master'){
  
                         environment {
 
@@ -154,7 +154,7 @@ pipeline {
                         //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: 'dh-lemniscata-devops-prod']]) {
-                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-lemniscata-devops-prod 682647774837.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=prod -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-kath-devops-prod 672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
