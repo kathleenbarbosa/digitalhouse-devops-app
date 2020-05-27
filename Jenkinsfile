@@ -141,7 +141,7 @@ pipeline {
                         }
 
 
-                        docker.withRegistry('https://682647774837.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-key') {
+                        docker.withRegistry('https://672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest', 'ecr:us-east-1:ecr-key') {
                             docker.image('digitalhouse-devops').pull()
                         }
 
