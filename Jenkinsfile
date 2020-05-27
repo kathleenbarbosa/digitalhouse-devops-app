@@ -89,7 +89,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='master'){
+                    if(env.GIT_BRANCH=='origin/master'){
  
                         docker.withRegistry('https://672641342667.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops', 'ecr:us-east-1:ecr-key') {
                             docker.image('digitalhouse-devops').pull()
@@ -126,7 +126,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='master'){
+                    if(env.GIT_BRANCH=='origin/master'){
  
                         environment {
 
