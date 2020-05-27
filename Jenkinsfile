@@ -134,7 +134,7 @@ pipeline {
                             AWS_ACCESS_KEY=""
                             AWS_SECRET_ACCESS_KEY=""
                             AWS_SDK_LOAD_CONFIG="0"
-                            BUCKET_NAME="dh-lemniscata-devops-prod"
+                            BUCKET_NAME="dh-kath-devops-prod"
                             REGION="us-east-1" 
                             PERMISSION=""
                             ACCEPTED_FILE_FORMATS_ARRAY=""
